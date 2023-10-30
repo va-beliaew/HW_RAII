@@ -11,6 +11,8 @@ private:
 	}
 
 public:
+		smart_array(const smart_array&) = delete;
+		smart_array& operator= (const smart_array&) = delete;
 		smart_array(int count_) {
 			if (count_ < 1) 
 			throw std::underflow_error("Нулевое или отрицательное количество элементов массива");
@@ -27,7 +29,7 @@ public:
 	}
 
 	int get_element(int loc) {
-		if (loc >= count || loc < 0)
+		if (loc >= counter || loc < 0)
 			throw std::range_error("Выход за пределы диапазона массива");
 		return arr[loc];
 	}

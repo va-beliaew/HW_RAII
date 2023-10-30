@@ -11,6 +11,13 @@ private:
 	}
 
 public:
+	smart_array(const smart_array &c) {
+		count = c.count;
+		New();
+		for (int i = 0; i < count; ++i) {
+			arr[i] = c.arr[i];
+		}
+	}
 	smart_array(int count_) {
 		if (count_ < 1)
 			throw std::underflow_error("Нулевое или отрицательное количество элементов массива");
@@ -27,15 +34,20 @@ public:
 	}
 
 	int get_element(int loc) {
-		if (loc >= count || loc < 0)
+		if (loc >= counter || loc < 0)
 			throw std::range_error("Выход за пределы диапазона массива");
 		return arr[loc];
 	}
 
-	void operator= (smart_array& c) {
-		for (int i = 0; i < count; ++i) {
-			arr[i] = c.get_element(i);
+	smart_array& operator= (const smart_array& c) {
+		if (&c != this) {
+			delete[] arr;
+			arr = new int[c.count];
+			for (int i = 0; i < c.count; ++i) {
+				arr[i] = c.arr[i];
+			}
 		}
+		return *this;
 	} 
 	void print(std::string s) {
 		std::cout << s << ':' << std::endl;
