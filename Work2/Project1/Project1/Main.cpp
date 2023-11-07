@@ -13,6 +13,7 @@ private:
 public:
 	smart_array(const smart_array &c) {
 		count = c.count;
+		counter = c.counter;
 		New();
 		for (int i = 0; i < count; ++i) {
 			arr[i] = c.arr[i];
@@ -41,6 +42,7 @@ public:
 
 	smart_array& operator= (const smart_array& c) {
 		if (&c != this) {
+			counter = c.counter;
 			delete[] arr;
 			arr = new int[c.count];
 			for (int i = 0; i < c.count; ++i) {
